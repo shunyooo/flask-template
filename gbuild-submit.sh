@@ -1,0 +1,1 @@
+gcloud builds submit --tag gcr.io/cyberagent-349/flask-template --project cyberagent-349

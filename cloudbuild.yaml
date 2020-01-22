@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/cyberagent-349/flask-template', '-f', './Dockerfile', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/cyberagent-349/flask-template']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'flask-template', '--image', 'gcr.io/cyberagent-349/flask-template', '--region', 'us-central1', '--platform', 'managed', '--memory', '1Gi', '--allow-unauthenticated']
+timeout: 1800s
+images:
+- 'gcr.io/cyberagent-349/flask-template'

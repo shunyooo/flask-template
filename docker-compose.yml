@@ -8,5 +8,3 @@ services:
       - ./app:/app
       - ./config:/config
     env_file: .env
-    stdin_open: true
-    tty: true
