@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}
+  Flask| UIKit
+{% endblock %}
+{% block content %}
+<div class="uk-position-relative">
+  <div class="uk-cover-container uk-position-top">
+  </div>
+  <!-- Navigation Bar -->
+  <nav class="uk-dark uk-navbar-container uk-padding-small uk-padding-remove-vertical uk-navbar-transparent" uk-navbar>
+    <div class="uk-navbar-left">
+      <!-- LOGO -->
+      <a href="#" class="uk-navbar-item uk-logo">Flask Template</a>
+      <ul class="uk-navbar-nav">
+        <li>
+          <a href="#"><span class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>Item</a>
+          <!-- DropDown -->
+          <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
+            <div class="uk-navbar-dropdown-grid uk-child-width-1-2" uk-grid>
+              <div>
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <li class="uk-active"><a href="#">Active</a></li>
+                  <li><a href="#">Item</a></li>
+                  <li class="uk-nav-header">Header</li>
+                  <li><a href="#">Item</a></li>
+                  <li><a href="#">Item</a></li>
+                  <li class="uk-nav-divider"></li>
+                  <li><a href="#">Item</a></li>
+                </ul>
+              </div>
+              <div>
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <li class="uk-active"><a href="#">Active</a></li>
+                  <li><a href="#">Item</a></li>
+                  <li class="uk-nav-header">Header</li>
+                  <li><a href="#">Item</a></li>
+                  <li><a href="#">Item</a></li>
+                  <li class="uk-nav-divider"></li>
+                  <li><a href="#">Item</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="uk-navbar-right">
+      <div class="uk-navbar-item">
+        <!-- Input -->
+        <form action="javascript:void(0)">
+          <input class="uk-input uk-form-width-small" type="text" placeholder="Input">
+          <button class="uk-button uk-button-default">Button</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="uk-child-width-2-2 uk-grid-small uk-grid-match uk-padding-small" uk-grid>
+  <div>
+    <div class="uk-card uk-card-default uk-flex uk-card-hover uk-card-body uk-flex-column">
+      <h1 class="uk-heading-bullet">Front</h1>
+      <h2 class="uk-heading-divider">UIKit</h2>
+      <span>軽量で高機能なCSS Framework. このページもUIKitで書いている.</span>
+      <a href="https://getuikit.com/docs" target='uikit'>公式ドキュメント</a>
+    </div>
+  </div>
+  <div>
+    <div class="uk-card uk-card-default uk-flex uk-card-hover uk-card-body uk-flex-column">
+      <h1 class="uk-heading-bullet">Sample</h1>
+      <h2 class="uk-heading-divider">Ajax</h2>
+      <span>動的にAPIを叩くサンプル</span>
+
+      <div class="uk-form-stacked uk-padding-small uk-padding-remove-horizontal">
+          <div class="uk-margin">
+              <label class="uk-form-label" for="form-stacked-text">Text</label>
+              <div class="uk-form-controls">
+                  <input class="uk-input" id="form-stacked-text" type="text" placeholder="Some text...">
+              </div>
+          </div>
+
+          <div class="uk-margin">
+              <label class="uk-form-label" for="form-stacked-select">Select</label>
+              <div class="uk-form-controls">
+                  <select class="uk-select" id="form-stacked-select">
+                      <option>Option 01</option>
+                      <option>Option 02</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="uk-margin">
+              <div class="uk-form-label">Radio</div>
+              <div class="uk-form-controls">
+                  <label><input class="uk-radio" type="radio" name="radio1"> Option 01</label><br>
+                  <label><input class="uk-radio" type="radio" name="radio1"> Option 02</label>
+              </div>
+          </div>
+          <button id="submit" class="uk-button uk-button-primary">Submit</button>
+          <div id="result" class="uk-card uk-card-default uk-card-body uk-margin-small">Result</div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+{% endblock %}
+
+
+{% block extrajs %}
+<script type="text/javascript">
+    $(function () {
+        // 初期セッティング
+        $('#result').hide();
+
+        // API 取得サンプル
+        async function fetch_json(url) {
+          return await (await fetch(url)).json();
+        }
+
+        $('#submit').on('click', e => {
+          // GET
+          fetch_json('/api/hello-world').then(resJson => {
+            console.log(resJson);
+            $('#result').text(JSON.stringify(resJson));
+            $('#result').show('normal');
+          })
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block extracss %}
+<style>
+body {
+  background-image: url("{{url_for('static', filename='image/white-paper-texture.png')}}");
+  min-height: 100vh;
+}
+</style>
+{% endblock %}

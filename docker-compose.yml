@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  flask:
+    build: .
+    ports:
+      - 8888:${PORT}
+    volumes:
+      - ./app:/app
+      - ./config:/config
+    env_file: .env
+    stdin_open: true
+    tty: true
