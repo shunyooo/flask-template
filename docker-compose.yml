@@ -3,8 +3,4 @@ services:
   flask:
     build: .
     ports:
-      - 8888:${PORT}
-    volumes:
-      - ./app:/app
-      - ./config:/config
-    env_file: .env
+      - 8888:8888

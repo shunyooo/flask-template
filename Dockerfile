@@ -10,7 +10,12 @@ COPY ./app /app
 COPY ./config /config
 
 # Install production dependencies.
-RUN pip install -r /tmp/requirements.txt
+RUN pip install --upgrade pip && pip install -r /tmp/requirements.txt
 
-# CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app --reload
+ENV PORT 8888
+ENV GOOGLE_APPLICATION_CREDENTIALS /config/cyberagent-349-5ffc6c6724f8.json
+
+# PRODUCTION
+# CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 main:app --reload
+# DEBUG
 CMD python main.py
